@@ -20,7 +20,7 @@ export default class Staff extends React.Component {
   }
 
   handleClick = (event) => {
-      const id = event.target.value
+    const id = event.target.value
       
     this.setState(state => {
         const user = state.users.filter(user => user.id === id)

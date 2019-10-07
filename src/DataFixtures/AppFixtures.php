@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Prestation;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -38,6 +39,16 @@ class AppFixtures extends Fixture
             $user->setColor($this->faker->rgbcolor);
 
             $manager->persist($user);
+        }
+
+        for ($i=0; $i < 10; $i++) { 
+            $prestation = new Prestation();
+
+            $prestation->setName('Prestation '.$i);
+            $prestation->setTimeMaking((new \DateTime())->setTime(0,$this->faker->randomElement([10,15,20,30,40,45,50,60])));
+            $prestation->setPriceHt($this->faker->randomFloat(4,1,100));
+
+            $manager->persist($prestation);
         }
 
         $manager->flush();
