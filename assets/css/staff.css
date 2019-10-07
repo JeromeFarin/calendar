@@ -1,0 +1,20 @@
+#staff ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+}
+
+#staff li {
+    width: 200px;
+    text-align: center;
+    color: #000;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#staff li.selected {
+    border: 1px solid #000;
+}
+
