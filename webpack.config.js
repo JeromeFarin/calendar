@@ -49,7 +49,8 @@ Encore
 
     // enables @babel/preset-env polyfills
     .configureBabel((babelConfig) => {
-        babelConfig.plugins.push('@babel/plugin-proposal-class-properties')
+        babelConfig.plugins.push(["@babel/plugin-proposal-decorators", { legacy: true }])
+        babelConfig.plugins.push(['@babel/plugin-proposal-class-properties', { loose: true }])
     }, {
         useBuiltIns: 'usage',
         corejs: 3

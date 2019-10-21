@@ -6,47 +6,45 @@ import { faCaretSquareLeft, faCaretSquareRight } from '@fortawesome/free-solid-s
 import '../css/date.css'
 
 export default class Date extends React.Component {
-  constructor (props) {
-    super(props)
-    
-    this.state = {
-      date: '',
-      monthsShow: false
-    }
+  state = {
+    date: moment(),
+    monthsShow: false
   }
 
-  componentWillMount() {
-    this.setState({date: moment()})
+  componentDidMount () {
+    this.setState({ date: moment() })
   }
-  
+
+  componentDidUpdate () {
+    this.props.store.week = this.state.date.week() - 1
+  }
+
   handleMonthsHide = () => {
     this.setState({
-      date: moment().week(this.state.date.week()-1),
+      date: moment().week(this.state.date.week() - 1),
       monthsShow: false
     })
   }
 
   handleMonthsShow = () => {
     this.setState({
-      date: moment().week(this.state.date.week()-1),
+      date: moment().week(this.state.date.week() - 1),
       monthsShow: true
     })
   }
 
   handleMonthChoice = (event) => {
     this.handleMonthsHide()
-    this.setState({date: moment().month(event.target.value)})
+    this.setState({ date: moment().month(event.target.value) })
   }
 
   monthsModal = () => {
     const months = moment.months()
-    return(
+    return (
       <Modal show={this.state.monthsShow} onHide={this.handleMonthsHide} centered>
         <Modal.Body>
           <div>
-            {months.map((month) =>
-              <Button className="month" key={month} value={month} onClick={this.handleMonthChoice}>{month}</Button>
-            )}
+            {months.map((month) => <Button className='month' key={month} value={month} onClick={this.handleMonthChoice}>{month}</Button>)}
           </div>
         </Modal.Body>
         <Modal.Footer>
@@ -57,21 +55,19 @@ export default class Date extends React.Component {
   }
 
   handleNextWeek = () => {
-    this.setState({date: moment().week(this.state.date.week())})
+    this.setState({ date: moment().week(this.state.date.week() + 1) })
   }
 
   handlePreviousWeek = () => {
-    this.setState({date: moment().week(this.state.date.week()-2)})
+    this.setState({ date: moment().week(this.state.date.week() - 1) })
   }
 
   render () {
-    const date = this.state.date
-    
     return (
       <div>
         <div>
           <Button variant='' onClick={this.handlePreviousWeek}><FontAwesomeIcon icon={faCaretSquareLeft} /></Button>
-          <Button variant='primary' onClick={this.handleMonthsShow}>From {date.day(1).format('Do MMMM YYYY')} to {date.day(7).format('Do MMMM YYYY')}</Button>
+          <Button variant='primary' onClick={this.handleMonthsShow}>Week {this.state.date.week() - 1}</Button>
           <Button variant='' onClick={this.handleNextWeek}><FontAwesomeIcon icon={faCaretSquareRight} /></Button>
         </div>
 

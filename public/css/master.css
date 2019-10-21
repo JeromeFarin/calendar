@@ -1,0 +1,10 @@
+html, body {
+    height: 100%;
+}
+.container {
+    min-height: 100%;
+    margin-bottom: -142px; 
+}
+footer {
+    height: 142px;
+}

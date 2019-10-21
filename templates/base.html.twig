@@ -5,6 +5,7 @@
         <title>{% block title %}Calendar API{% endblock %}</title>
         {% block stylesheets %}
             {{ encore_entry_link_tags('App') }}
+            <link rel="stylesheet" href="/css/master.css">
         {% endblock %}
     </head>
     <body>
@@ -16,5 +17,6 @@
         {% block javascripts %}
             {{ encore_entry_script_tags('App') }}
         {% endblock %}
+        {% include "footer.html.twig" %}
     </body>
 </html>

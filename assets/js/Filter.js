@@ -8,13 +8,13 @@ export default class Filter extends React.Component {
     return (
       <div>
         <div id='date'>
-          <Date />
+          <Date store={this.props.store} />
         </div>
         <div id='staff'>
-          <Staff />
+          <Staff store={this.props.store} />
         </div>
         <div id='prestation'>
-          <Prestation />
+          <Prestation store={this.props.store} />
         </div>
       </div>
     )
