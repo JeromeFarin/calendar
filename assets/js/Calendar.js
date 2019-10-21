@@ -5,9 +5,7 @@ import '../css/calendar.css'
 
 @observer
 class Calendar extends React.Component {
-  handleDay (day) {
-    console.log(day)
-
+  handleDay () {
     return (
       <td>
         {this.props.store.staffs.map((staff, i) => (
