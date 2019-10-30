@@ -1,57 +1,102 @@
-import React from 'react'
+import React, { Component } from 'react'
 import '../css/staff.css'
+import Place from './Place'
 
-export default class Staff extends React.Component {
+class Staff extends Component {
   state = {
-    users: []
+    place_count: 1,
+    places: []
   }
 
-  componentDidMount () {
-    window.fetch('/api/users?page=1', {
-      headers: {
-        Accept: 'application/json'
-      }
-    })
-      .then((response) => response.json())
-      .then((data) => this.setState({ users: data }))
-  }
+  componentWillMount () {
+    const { ...gStart } = this.props.opened.start
+    const { ...gEnd } = this.props.opened.end
 
-  componentDidUpdate () {
-    this.props.store.staffs = this.state.users.filter((user) => user.selected === true)
-  }
-
-  handleClick = (event) => {
-    const id = event.target.value
-
-    this.setState((state) => {
-      const user = state.users.filter((user) => user.id === id)
-      return (user[0].selected = !user[0].selected)
-    })
-  }
-
-  handleColor (user) {
-    if (user.selected) {
-      return { backgroundColor: `rgba(${user.color},1)` }
+    if (this.props.unavailabilities.length > 0) {
+      this.props.unavailabilities.forEach((u) => {
+        this.state.place_count = this.state.place_count + 1
+        if (
+          new Date(u.start) < new Date(u.end) &&
+          new Date(u.start) < new Date(u.end).setHours(gEnd.hours, gEnd.minutes)
+        ) {
+          if (
+            new Date(u.start) <= new Date(u.start).setHours(gStart.hours, gStart.minutes) &&
+            new Date(u.end) >= new Date(u.end).setHours(gEnd.hours, gEnd.minutes)
+          ) {
+            this.state.places.push({
+              id: this.state.place_count,
+              type: '0',
+              start: new Date(u.start).setHours(gStart.hours, gStart.minutes),
+              end: new Date(u.end).setHours(gEnd.hours, gEnd.minutes)
+            })
+          } else if (
+            new Date(u.end) > new Date(u.end).setHours(gStart.hours, gStart.minutes) &&
+            new Date(u.start) <= new Date(u.start).setHours(gStart.hours, gStart.minutes)
+          ) {
+            this.state.places.push({
+              id: this.state.place_count,
+              type: '0',
+              start: new Date(u.start).setHours(gStart.hours, gStart.minutes),
+              end: new Date(u.end)
+            })
+            gStart.hours = new Date(u.end).getHours()
+            gStart.minutes = new Date(u.end).getMinutes()
+          } else if (
+            new Date(u.end) > new Date(u.end).setHours(gStart.hours, gStart.minutes) &&
+            new Date(u.start) > new Date(u.start).setHours(gStart.hours, gStart.minutes)
+          ) {
+            this.state.places.push({
+              id: this.state.place_count,
+              type: '1',
+              start: new Date(u.start).setHours(gStart.hours, gStart.minutes),
+              end: new Date(u.start)
+            })
+            this.state.places.push({
+              id: this.state.place_count,
+              type: '0',
+              start: new Date(u.start),
+              end: new Date(u.end)
+            })
+            gStart.hours = new Date(u.end).getHours()
+            gStart.minutes = new Date(u.end).getMinutes()
+          }
+        }
+      })
     }
-    return { backgroundColor: `rgba(${user.color},0.4)` }
+    this.state.place_count = this.state.place_count + 1
+    this.state.places.push({
+      id: this.state.place_count,
+      type: '1',
+      start: new Date(this.props.date).setHours(gStart.hours, gStart.minutes),
+      end: new Date(this.props.date).setHours(gEnd.hours, gEnd.minutes)
+    })
+  }
+
+  getSize (start, end) {
+    const gEnd = new Date(end).setHours(this.props.opened.end.hours, this.props.opened.end.minutes)
+    const gStart = new Date(start).setHours(this.props.opened.start.hours, this.props.opened.start.minutes)
+    const s = new Date(start).getTime()
+    const e = new Date(end).getTime()
+
+    return ((e - s) * 100) / (gEnd - gStart)
   }
 
   render () {
     return (
-      <ul>
-        {this.state.users.map((user) => (
-          <li
-            key={user.id}
-            style={this.handleColor(user)}
-            onClick={this.handleClick}
-            value={user.id}
-            data-selected={user.selected}
-            className={user.selected ? 'selected' : ''}
-          >
-            {user.pseudo}
-          </li>
+      <div className='staff' style={{ marginLeft: this.props.left }}>
+        {this.state.places.map((place) => (
+          <Place
+            key={Math.random()}
+            size={this.getSize(place.start, place.end)}
+            staff={this.props.staff}
+            type={place.type}
+            start={place.start}
+            end={place.end}
+          />
         ))}
-      </ul>
+      </div>
     )
   }
 }
+
+export default Staff

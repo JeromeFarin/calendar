@@ -1,5 +1,5 @@
 import React from 'react'
-import Staff from './Staff'
+import StaffList from './StaffList'
 import Date from './Date'
 import Prestation from './Prestation'
 
@@ -10,8 +10,8 @@ export default class Filter extends React.Component {
         <div id='date'>
           <Date store={this.props.store} />
         </div>
-        <div id='staff'>
-          <Staff store={this.props.store} />
+        <div id='staff_list'>
+          <StaffList store={this.props.store} />
         </div>
         <div id='prestation'>
           <Prestation store={this.props.store} />

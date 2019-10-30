@@ -17,6 +17,7 @@ export default class Date extends React.Component {
 
   componentDidUpdate () {
     this.props.store.week = this.state.date.week()
+    this.props.store.year = this.state.date.year()
   }
 
   handleMonthsHide = () => {
@@ -67,7 +68,7 @@ export default class Date extends React.Component {
       <div>
         <div>
           <Button variant='' onClick={this.handlePreviousWeek}><FontAwesomeIcon icon={faCaretSquareLeft} /></Button>
-          <Button variant='primary' onClick={this.handleMonthsShow}>Week {this.state.date.week()}</Button>
+          <Button variant='primary' onClick={this.handleMonthsShow}>{this.state.date.format('MMMM')} week {this.state.date.week()}</Button>
           <Button variant='' onClick={this.handleNextWeek}><FontAwesomeIcon icon={faCaretSquareRight} /></Button>
         </div>
 

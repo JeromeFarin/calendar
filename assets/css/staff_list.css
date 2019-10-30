@@ -1,0 +1,20 @@
+#staff_list ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+}
+
+#staff_list li {
+    width: 200px;
+    text-align: center;
+    color: #000;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#staff_list li.selected {
+    border: 1px solid #000;
+}
+

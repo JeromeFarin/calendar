@@ -5,7 +5,11 @@ class Store {
 
     @observable week = 0
 
+    @observable year = 0
+
     @observable prestations = []
+
+    @observable unavailables = []
 }
 
 const store = new Store()

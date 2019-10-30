@@ -19,23 +19,6 @@ class UnavailabilityRepository extends ServiceEntityRepository
         parent::__construct($registry, Unavailability::class);
     }
 
-    // /**
-    //  * @return Unavailability[] Returns an array of Unavailability objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('i')
-            ->andWhere('i.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('i.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
     /*
     public function findOneBySomeField($value): ?Unavailability
     {
