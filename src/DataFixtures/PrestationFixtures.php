@@ -21,7 +21,7 @@ class PrestationFixtures extends Fixture
         for ($i=0; $i < 10; $i++) { 
             $prestation = new Prestation();
 
-            $prestation->setName('Prestation '.$i);
+            $prestation->setName($this->faker->word);
             $prestation->setTimeMaking((new \DateTime())->setTime(0,$this->faker->randomElement([10,15,20,30,40,45,50,60])));
             $prestation->setPriceHt($this->faker->randomFloat(4,1,100));
 

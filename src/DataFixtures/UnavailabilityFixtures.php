@@ -18,8 +18,8 @@ class UnavailabilityFixtures extends Fixture  implements DependentFixtureInterfa
 
     public function load(ObjectManager $manager)
     {
-        for ($i=0; $i < 20; $i++) {
-            $start = $this->faker->dateTimeBetween('now', '+1 month');
+        for ($i=0; $i < 50; $i++) {
+            $start = $this->faker->dateTimeBetween('-1 month', '+1 month');
             $end = $this->faker->dateTimeBetween($start, $start->format('Y-m-d H:i:s').' +1 days');
             $unavailability = new Unavailability();
             $unavailability->setStaff($this->getReference('user'.rand(1,5)));

@@ -19,15 +19,18 @@ class UnavailabilityRepository extends ServiceEntityRepository
         parent::__construct($registry, Unavailability::class);
     }
 
-    /*
-    public function findOneBySomeField($value): ?Unavailability
+    public function findAllBetweenDate($start, $end)
     {
-        return $this->createQueryBuilder('i')
-            ->andWhere('i.exampleField = :val')
-            ->setParameter('val', $value)
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.start >= :start')
+            ->andWhere('u.start <= :end')
+            ->andWhere('u.end >= :start')
+            ->andWhere('u.end <= :end')
+            ->setParameter('start', $start)
+            ->setParameter('end', $end)
+            ->orderBy('u.start')
             ->getQuery()
-            ->getOneOrNullResult()
+            ->getResult()
         ;
     }
-    */
 }
