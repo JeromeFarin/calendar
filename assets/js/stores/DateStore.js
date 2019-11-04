@@ -1,10 +1,8 @@
-import { observable, runInAction, autorun } from 'mobx'
+import { observable, runInAction } from 'mobx'
 import moment from 'moment'
 
 class DateStore {
     @observable date = moment()
-
-    @observable days = []
 
     @observable opened = {
       start: {
@@ -15,14 +13,6 @@ class DateStore {
         hours: '16',
         minutes: '00'
       }
-    }
-
-    getDays () {
-      autorun(() => {
-        for (let i = 1; i < 7; i += 1) {
-          this.days = this.date.day(i)
-        }
-      })
     }
 
     addWeek () {

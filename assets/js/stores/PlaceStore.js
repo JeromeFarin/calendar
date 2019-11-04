@@ -2,7 +2,7 @@ import { observable, autorun, observe } from 'mobx'
 import moment from 'moment'
 import dateStore from './DateStore'
 import staffStore from './StaffStore'
-// import prestationStore from './PrestationStore'
+import prestationStore from './PrestationStore'
 import unavailabilityStore from './UnavailabilityStore'
 
 class PlaceStore {
@@ -12,16 +12,31 @@ class PlaceStore {
 
   loaded = false
 
-  addPlace (type, staff, day, start, end) {
-    const size = this.getSize(start, end)
-    this.places.push({
-      type,
-      staff,
-      day,
-      start,
-      end,
-      size
+  getTime () {
+    let time = 0
+    prestationStore.prestations.map((prestation) => {
+      if (prestation.selected) {
+        time = time + (moment(prestation.timeMaking).hour() * 3600000) + (moment(prestation.timeMaking).minute() * 60000)
+      }
     })
+    return time
+  }
+
+  addPlace (type, staff, day, start, end) {
+    const time = this.getTime()
+    const size = this.getSize(start, end)
+    if (parseInt(type, 10) === 1) {
+      if (time <= (moment(end).valueOf() - moment(start).valueOf())) {
+        this.places.push({
+          type,
+          staff,
+          day,
+          start,
+          end,
+          size
+        })
+      }
+    }
   }
 
   getSize (start, end) {
