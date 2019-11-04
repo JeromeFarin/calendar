@@ -36,6 +36,15 @@ class PlaceStore {
           size
         })
       }
+    } else {
+      this.places.push({
+        type,
+        staff,
+        day,
+        start,
+        end,
+        size
+      })
     }
   }
 
