@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import { observer, inject } from 'mobx-react'
 import Day from './Calendar/Day'
 
-@inject('unavailabilityStore', 'placeStore', 'dateStore')
+@inject('unavailabilityStore', 'slotStore', 'dateStore')
 @observer
 class Calendar extends Component {
   componentDidMount () {
-    this.props.placeStore.loadPlaces()
+    this.props.slotStore.loadSlots()
     this.props.unavailabilityStore.loadUnavailabilities()
   }
 

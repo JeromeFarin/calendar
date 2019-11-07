@@ -16,5 +16,6 @@
 
 #staff_list li.selected {
     border: 1px solid #000;
+    box-shadow: 3px 3px 3px #000;
 }
 

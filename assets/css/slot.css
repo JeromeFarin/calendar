@@ -1,0 +1,15 @@
+.slot {
+    width: 80px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 1;
+    text-align: center;
+    position: relative;
+}
+
+.available:hover {
+    cursor: pointer;
+    z-index: 2;
+}

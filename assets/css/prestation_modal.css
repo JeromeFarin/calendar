@@ -1,0 +1,19 @@
+#prestation_modal li {
+    border-radius: 10px;
+    list-style: none;
+    color: #000;
+    margin: 5px;
+    padding: 5px;
+    text-align: center;
+    cursor: pointer;
+}
+#prestation_modal li:hover {
+    background-color: #00c2f3;
+}
+#prestation_modal li.selected {
+    background-color: #0066ff;
+    color: #fff;
+}
+#prestation_modal em {
+    font-size: 0.8em;
+}

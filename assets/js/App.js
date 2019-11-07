@@ -8,12 +8,15 @@ import StaffStore from './stores/StaffStore'
 import DateStore from './stores/DateStore'
 import PrestationStore from './stores/PrestationStore'
 import UnavailabilityStore from './stores/UnavailabilityStore'
-import PlaceStore from './stores/PlaceStore'
+import SlotStore from './stores/SlotStore'
+import ModalStore from './stores/ModalStore'
+import Modal from './components/Modal'
 
 class App extends Component {
   render () {
     return (
       <div>
+        <Modal />
         <div id='filter'>
           <Filter />
         </div>
@@ -31,7 +34,8 @@ ReactDOM.render(
     dateStore={DateStore}
     prestationStore={PrestationStore}
     unavailabilityStore={UnavailabilityStore}
-    placeStore={PlaceStore}
+    slotStore={SlotStore}
+    modalStore={ModalStore}
   >
     <App />
   </Provider>,

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import '../../../css/prestation.css'
 import { observer, inject } from 'mobx-react'
+import moment from 'moment'
 
 @inject('prestationStore')
 @observer
@@ -23,7 +24,7 @@ class Prestation extends Component {
             value={prestation.id}
             className={prestation.selected ? 'selected' : ''}
           >
-            {prestation.name}
+            {prestation.name} ({moment(prestation.timeMaking).format('HH:mm')})
           </li>
         ))}
       </ul>

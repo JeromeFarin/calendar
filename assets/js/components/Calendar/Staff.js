@@ -1,24 +1,43 @@
 import React, { Component } from 'react'
 import '../../../css/staff.css'
 import { observer, inject } from 'mobx-react'
-import Place from './Place'
+import moment from 'moment'
+import Slot from './Slot'
 
-@inject('placeStore')
+@inject('slotStore', 'prestationStore')
 @observer
 class Staff extends Component {
   render () {
     return (
       <div className='staff' style={{ marginLeft: this.props.left }}>
-        {this.props.placeStore.places.filter((place) => place.staff.id === this.props.staff.id && place.day === this.props.day).map((place) => (
-          <Place
-            key={Math.random()}
-            type={place.type}
-            staff={place.staff}
-            size={place.size}
-            start={place.start}
-            end={place.end}
-          />
-        ))}
+        {this.props.slotStore.slots.filter((slot) => (
+          slot.staff.id === this.props.staff.id &&
+          slot.day === this.props.day
+        )).map((slot) => {
+          if (parseInt(slot.type, 10) === 1 && (moment(slot.end) - moment(slot.start)) < this.props.prestationStore.getTime()) {
+            return (
+              <Slot
+                key={slot.id}
+                type={0}
+                staff={slot.staff}
+                size={slot.size}
+                start={slot.start}
+                end={slot.end}
+              />
+            )
+          }
+          return (
+            <Slot
+              key={slot.id}
+              id={slot.id}
+              type={slot.type}
+              staff={slot.staff}
+              size={slot.size}
+              start={slot.start}
+              end={slot.end}
+            />
+          )
+        })}
       </div>
     )
   }
