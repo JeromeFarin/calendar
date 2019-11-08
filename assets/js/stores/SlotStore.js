@@ -33,6 +33,10 @@ class SlotStore {
     return ((moment(end).valueOf() - moment(start).valueOf()) * 100) / (moment(end).hour(gEnd.hours).minute(gEnd.minutes).valueOf() - moment(start).hour(gStart.hours).minute(gStart.minutes).valueOf())
   }
 
+  getSlot (id) {
+    return this.slots.find((slot) => slot.id === parseInt(id, 10))
+  }
+
   loadSlots () {
     autorun(() => {
       observe(unavailabilityStore, () => {

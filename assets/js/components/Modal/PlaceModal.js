@@ -13,7 +13,12 @@ class PlaceModal extends Component {
     return (
       <Modal show={this.props.modalStore.placeModal} onHide={this.handleClick} centered>
         <Modal.Body>
-          {this.props.modalStore.places}
+          {this.props.modalStore.places.map((place) => (
+            <div className='form-check' key={place.id}>
+              <input className='form-check-input' type='radio' name='place_radio' id={`radio_${place.id}`} value={place.id} />
+              <label className='form-check-label' htmlFor={`radio_${place.id}`}>{place.start.format('HH:mm')} - {place.end.format('HH:mm')}</label>
+            </div>
+          ))}
         </Modal.Body>
         <Modal.Footer>
           <Button variant='primary'>Confirm</Button>
