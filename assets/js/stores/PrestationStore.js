@@ -24,9 +24,13 @@ class PrestationStore {
       })
   }
 
+  selectedPrestations () {
+    return this.prestations.filter((prestation) => prestation.selected)
+  }
+
   loadSelected () {
     runInAction(() => {
-      if (this.prestations.filter((prestation) => prestation.selected).length > 0) {
+      if (this.selectedPrestations().length > 0) {
         this.isSelected = false
       } else {
         this.isSelected = true
@@ -36,7 +40,7 @@ class PrestationStore {
 
   removeAll () {
     runInAction(() => {
-      this.prestations.filter((prestation) => prestation.selected).map((prestation) => {
+      this.selectedPrestations().map((prestation) => {
         this.prestationUpdate(prestation.id)
       })
     })

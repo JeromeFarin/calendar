@@ -54,7 +54,6 @@ class ModalStore {
         staff: slot.staff
       })
     }
-    console.log(this.places)
   }
 }
 
