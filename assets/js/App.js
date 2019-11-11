@@ -11,9 +11,17 @@ import UnavailabilityStore from './stores/UnavailabilityStore'
 import SlotStore from './stores/SlotStore'
 import ModalStore from './stores/ModalStore'
 import Modal from './components/Modal'
+import ErrorStore from './stores/ErrorStore'
 
 class App extends Component {
   render () {
+    if (parseInt(ErrorStore.errors, 10) !== 0) {
+      return (
+        <div className='alert alert-danger'>
+          <strong>ERROR !</strong> An error as occurred, please click <a href='/'>here</a> and if persist problem, contact administrator <a href='/contact'>here</a>
+        </div>
+      )
+    }
     return (
       <div>
         <Modal />

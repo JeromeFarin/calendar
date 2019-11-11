@@ -6,7 +6,6 @@ class ErrorStore {
   updateErrors () {
     runInAction(() => {
       this.errors = this.errors + 1
-      console.log(this.errors)
     })
   }
 }
