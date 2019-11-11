@@ -10,7 +10,7 @@ class ModalStore {
 
   @observable staffModal = false
 
-  @observable prestationModal = true // true
+  @observable prestationModal = false // true
 
   @observable slotId = 0
 

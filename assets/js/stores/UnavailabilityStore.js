@@ -3,6 +3,7 @@ import {
   autorun
 } from 'mobx'
 import dateStore from './DateStore'
+import errorStore from './ErrorStore'
 
 class UnavailabilityStore {
   @observable unavailabilities = []
@@ -25,6 +26,10 @@ class UnavailabilityStore {
           autorun(() => {
             this.unavailabilities = data
           })
+        })
+        .catch((error) => {
+          console.log(error.message)
+          errorStore.updateErrors()
         })
     })
   }

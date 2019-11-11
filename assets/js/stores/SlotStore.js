@@ -9,8 +9,6 @@ class SlotStore {
 
   slotsId = 0
 
-  loaded = false
-
   addSlot (type, staff, day, start, end) {
     const size = this.getSize(start, end)
     this.slotsId = this.slotsId + 1

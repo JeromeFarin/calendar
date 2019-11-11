@@ -4,6 +4,7 @@ import {
   autorun
 } from 'mobx'
 import moment from 'moment'
+import errorStore from './ErrorStore'
 
 class PrestationStore {
   @observable prestations = []
@@ -21,6 +22,10 @@ class PrestationStore {
         autorun(() => {
           this.prestations = data
         })
+      })
+      .catch((error) => {
+        console.log(error.message)
+        errorStore.updateErrors()
       })
   }
 

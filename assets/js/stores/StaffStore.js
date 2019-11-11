@@ -1,4 +1,5 @@
 import { observable, runInAction, autorun } from 'mobx'
+import errorStore from './ErrorStore'
 
 class StaffStore {
   @observable staffs = []
@@ -16,6 +17,10 @@ class StaffStore {
         autorun(() => {
           this.staffs = data
         })
+      })
+      .catch((error) => {
+        console.log(error.message)
+        errorStore.updateErrors()
       })
   }
 
