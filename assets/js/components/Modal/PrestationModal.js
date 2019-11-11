@@ -7,6 +7,10 @@ import moment from 'moment'
 @inject('modalStore', 'prestationStore')
 @observer
 class PrestationModal extends Component {
+  componentDidUpdate () {
+    this.props.prestationStore.loadSelected()
+  }
+
   handleModal = () => {
     this.props.modalStore.togglePrestationModal()
   }
