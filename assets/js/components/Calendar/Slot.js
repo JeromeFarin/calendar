@@ -12,6 +12,7 @@ class Slot extends Component {
       this.props.modalStore.togglePlaceModal()
     } else {
       this.props.modalStore.togglePrestationModal()
+      this.props.modalStore.staffWay = false
     }
   }
 

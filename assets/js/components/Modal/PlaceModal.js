@@ -10,8 +10,15 @@ class PlaceModal extends Component {
   }
 
   render () {
+    let staff = ''
+    if (this.props.modalStore.places.length !== 0) {
+      staff = this.props.modalStore.places[0].staff.pseudo
+    }
     return (
       <Modal show={this.props.modalStore.placeModal} onHide={this.handleClick} centered>
+        <Modal.Header>
+          <h3>{staff}</h3>
+        </Modal.Header>
         <Modal.Body>
           {this.props.modalStore.places.map((place) => (
             <div className='form-check' key={place.id}>

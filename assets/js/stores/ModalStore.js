@@ -1,7 +1,7 @@
 import { observable, runInAction } from 'mobx'
+import moment from 'moment'
 import slotStore from './SlotStore'
 import prestationStore from './PrestationStore'
-import moment from 'moment'
 
 class ModalStore {
   @observable placeModal = false
@@ -10,9 +10,11 @@ class ModalStore {
 
   @observable staffModal = false
 
-  @observable prestationModal = false // true
+  @observable prestationModal = true // true
 
   @observable slotId = 0
+
+  @observable staffWay = true
 
   @observable places = []
 

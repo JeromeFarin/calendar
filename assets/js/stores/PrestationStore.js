@@ -50,7 +50,11 @@ class PrestationStore {
     runInAction(() => {
       this.prestations.find((prestation) => {
         if (prestation.id === id) {
-          prestation.selected = !prestation.selected
+          if (prestation.selected && this.selectedPrestations().length > 1) {
+            prestation.selected = !prestation.selected
+          } else if (!prestation.selected) {
+            prestation.selected = !prestation.selected
+          }
         }
       })
     })

@@ -16,7 +16,9 @@ class PrestationModal extends Component {
   }
 
   handleConfirm = () => {
-    this.props.modalStore.toggleStaffModal()
+    if (this.props.modalStore.staffWay) {
+      this.props.modalStore.toggleStaffModal()
+    }
     this.props.modalStore.togglePrestationModal()
   }
 
@@ -24,16 +26,29 @@ class PrestationModal extends Component {
     this.props.prestationStore.removeAll()
   }
 
+  handleContact () {
+    // redirect to contact page
+  }
+
   render () {
     this.props.prestationStore.loadSelected()
     const [...prestations] = this.props.prestationStore.prestations
+    let selected = ''
+    if (this.props.prestationStore.isSelected) {
+      selected = (
+        <div>
+          <em>Please, select at least one prestation</em>
+          <Button variant='secondary' onClick={this.handleContact}>{'I\'dont know'}</Button>
+        </div>
+      )
+    }
+
     return (
       <Modal id='prestation_modal' show={this.props.modalStore.prestationModal} onHide={this.handleModal} centered>
         <Modal.Header>
           <h3>Choose your prestations</h3>
         </Modal.Header>
         <Modal.Body>
-          <li className={this.props.prestationStore.isSelected ? 'selected' : ''} onClick={this.handleRemove}>I don't know</li>
           {prestations.map((prestation) => (
             <li
               key={prestation.id}
@@ -47,7 +62,8 @@ class PrestationModal extends Component {
           <em>You have possibility to change after</em>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant='primary' onClick={this.handleConfirm}>Confirm</Button>
+          {selected}
+          <Button variant='primary' onClick={this.handleConfirm} disabled={this.props.prestationStore.isSelected ? 'disable' : ''}>Confirm</Button>
           <Button variant='secondary' onClick={this.handleModal}>Cancel</Button>
         </Modal.Footer>
       </Modal>
