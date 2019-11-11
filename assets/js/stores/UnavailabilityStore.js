@@ -1,7 +1,5 @@
-import {
-  observable,
-  autorun
-} from 'mobx'
+import { observable, autorun } from 'mobx'
+import moment from 'moment'
 import dateStore from './DateStore'
 import errorStore from './ErrorStore'
 
@@ -25,12 +23,19 @@ class UnavailabilityStore {
         .then((data) => {
           autorun(() => {
             this.unavailabilities = data
+            this.orderUnavailabilities()
           })
         })
         .catch((error) => {
           console.log(error.message)
           errorStore.updateErrors()
         })
+    })
+  }
+
+  orderUnavailabilities () {
+    autorun(() => {
+      this.unavailabilities = this.unavailabilities.slice().sort((a, b) => moment(a.start).valueOf() - moment(b.start).valueOf())
     })
   }
 }

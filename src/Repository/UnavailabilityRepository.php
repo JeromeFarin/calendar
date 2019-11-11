@@ -28,7 +28,6 @@ class UnavailabilityRepository extends ServiceEntityRepository
             ->andWhere('u.end <= :end')
             ->setParameter('start', $start)
             ->setParameter('end', $end)
-            ->orderBy('u.start')
             ->getQuery()
             ->getResult()
         ;
