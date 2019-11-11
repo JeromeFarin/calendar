@@ -1,7 +1,5 @@
 import { observable, runInAction } from 'mobx'
-import moment from 'moment'
-import slotStore from './SlotStore'
-import prestationStore from './PrestationStore'
+import placeStore from './PlaceStore'
 
 class ModalStore {
   @observable placeModal = false
@@ -12,15 +10,13 @@ class ModalStore {
 
   @observable prestationModal = false // true
 
-  @observable slotId = 0
+  @observable confirmModal = false
 
   @observable staffWay = true
 
-  @observable places = []
-
   togglePlaceModal () {
     runInAction(() => {
-      this.loadPlaces()
+      placeStore.loadPlaces()
       this.placeModal = !this.placeModal
     })
   }
@@ -43,19 +39,10 @@ class ModalStore {
     })
   }
 
-  loadPlaces () {
-    const { ...slot } = slotStore.getSlot(this.slotId)
-    const availableTime = moment(slot.end).valueOf() - prestationStore.getTime()
-    this.places = []
-
-    for (let i = moment(slot.start).valueOf(); i < availableTime; i += 300000) {
-      this.places.push({
-        id: i,
-        start: moment(i),
-        end: moment(i + prestationStore.getTime()),
-        staff: slot.staff
-      })
-    }
+  toggleConfirmModal () {
+    runInAction(() => {
+      this.confirmModal = !this.confirmModal
+    })
   }
 }
 

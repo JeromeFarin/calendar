@@ -12,6 +12,7 @@ import SlotStore from './stores/SlotStore'
 import ModalStore from './stores/ModalStore'
 import Modal from './components/Modal'
 import ErrorStore from './stores/ErrorStore'
+import PlaceStore from './stores/PlaceStore'
 
 class App extends Component {
   render () {
@@ -44,6 +45,7 @@ ReactDOM.render(
     unavailabilityStore={UnavailabilityStore}
     slotStore={SlotStore}
     modalStore={ModalStore}
+    placeStore={PlaceStore}
   >
     <App />
   </Provider>,

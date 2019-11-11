@@ -1,8 +1,4 @@
-import {
-  observable,
-  runInAction,
-  autorun
-} from 'mobx'
+import { observable, runInAction, autorun } from 'mobx'
 import moment from 'moment'
 import errorStore from './ErrorStore'
 
@@ -34,20 +30,12 @@ class PrestationStore {
   }
 
   loadSelected () {
-    runInAction(() => {
+    autorun(() => {
       if (this.selectedPrestations().length > 0) {
         this.isSelected = false
       } else {
         this.isSelected = true
       }
-    })
-  }
-
-  removeAll () {
-    runInAction(() => {
-      this.selectedPrestations().map((prestation) => {
-        this.prestationUpdate(prestation.id)
-      })
     })
   }
 

@@ -3,12 +3,12 @@ import moment from 'moment'
 import '../../../css/slot.css'
 import { inject, observer } from 'mobx-react'
 
-@inject('modalStore', 'prestationStore')
+@inject('modalStore', 'prestationStore', 'placeStore')
 @observer
 class Slot extends Component {
   handleClick = (e) => {
     if (this.props.prestationStore.selectedPrestations().length > 0) {
-      this.props.modalStore.slotId = e.target.dataset.slotId
+      this.props.placeStore.slotId = e.target.dataset.slotId
       this.props.modalStore.togglePlaceModal()
     } else {
       this.props.modalStore.togglePrestationModal()

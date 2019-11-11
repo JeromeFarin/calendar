@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Modal, Button } from 'react-bootstrap'
 import { inject, observer } from 'mobx-react'
 import moment from 'moment'
+import '../../../css/date_modal.css'
 
 @inject('modalStore', 'dateStore')
 @observer
@@ -18,7 +19,7 @@ class MonthModal extends Component {
   render () {
     const months = moment.months()
     return (
-      <Modal show={this.props.modalStore.monthModal} onHide={this.handleClick} centered>
+      <Modal id='date_modal' show={this.props.modalStore.monthModal} onHide={this.handleClick} centered>
         <Modal.Body>
           <div>
             {months.map((month) => <Button className='month' key={month} value={month} onClick={this.handleMonthChoice}>{month}</Button>)}

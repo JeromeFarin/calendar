@@ -26,10 +26,6 @@ class PrestationModal extends Component {
     this.props.modalStore.togglePrestationModal()
   }
 
-  handleRemove = () => {
-    this.props.prestationStore.removeAll()
-  }
-
   handleContact () {
     // redirect to contact page
   }

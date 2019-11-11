@@ -1,4 +1,4 @@
-import { observable, autorun } from 'mobx'
+import { observable, autorun, runInAction } from 'mobx'
 import moment from 'moment'
 import dateStore from './DateStore'
 import errorStore from './ErrorStore'
@@ -34,7 +34,7 @@ class UnavailabilityStore {
   }
 
   orderUnavailabilities () {
-    autorun(() => {
+    runInAction(() => {
       this.unavailabilities = this.unavailabilities.slice().sort((a, b) => moment(a.start).valueOf() - moment(b.start).valueOf())
     })
   }

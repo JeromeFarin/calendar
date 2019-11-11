@@ -1,0 +1,11 @@
+#date_modal .modal-body div {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+#date_modal .modal-body div>* {
+    flex: 1 1 100px;
+}
+#date_modal .month {
+    margin: 10px;
+}
