@@ -6,6 +6,10 @@ import '../../../css/staff_modal.css'
 @inject('modalStore', 'staffStore')
 @observer
 class StaffModal extends Component {
+  componentDidMount () {
+    this.props.staffStore.loadSelected()
+  }
+
   handleModal = () => {
     this.props.modalStore.toggleStaffModal()
   }
@@ -19,7 +23,6 @@ class StaffModal extends Component {
   }
 
   render () {
-    this.props.staffStore.loadSelected()
     const [...staffs] = this.props.staffStore.staffs
     return (
       <Modal id='staff_modal' show={this.props.modalStore.staffModal} onHide={this.handleModal} centered>
