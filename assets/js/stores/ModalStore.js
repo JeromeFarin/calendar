@@ -8,7 +8,7 @@ class ModalStore {
 
   @observable staffModal = false
 
-  @observable prestationModal = false // true
+  @observable prestationModal = true
 
   @observable confirmModal = false
 

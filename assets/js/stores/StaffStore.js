@@ -26,7 +26,7 @@ class StaffStore {
 
   loadSelected () {
     runInAction(() => {
-      if (this.staffs.filter((staff) => staff.selected).length !== this.staffs.length) {
+      if (this.staffSelected().length !== this.staffs.length) {
         this.isSelected = false
       } else {
         this.isSelected = true
@@ -38,7 +38,11 @@ class StaffStore {
     runInAction(() => {
       this.staffs.find((staff) => {
         if (staff.id === id) {
-          staff.selected = !staff.selected
+          if (staff.selected && this.staffSelected().length > 1) {
+            staff.selected = !staff.selected
+          } else if (!staff.selected) {
+            staff.selected = !staff.selected
+          }
         }
       })
     })

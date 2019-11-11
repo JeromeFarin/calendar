@@ -32,8 +32,7 @@ class ConfirmModal extends Component {
           <div className='d-flex flex-column align-items-center '>
             <p>With {staff.pseudo}</p>
             <p>{moment(place.start).format('dddd D MMMM YYYY')}</p>
-            <p>From {moment(place.start).format('HH:mm')}</p>
-            <p>To {moment(place.end).format('HH:mm')}</p>
+            <p>From {moment(place.start).format('HH:mm')} To {moment(place.end).format('HH:mm')}</p>
           </div>
         </Modal.Body>
         <Modal.Footer>

@@ -6,7 +6,7 @@ import '../../../css/staff_modal.css'
 @inject('modalStore', 'staffStore')
 @observer
 class StaffModal extends Component {
-  componentDidMount () {
+  componentDidUpdate () {
     this.props.staffStore.loadSelected()
   }
 
@@ -30,7 +30,7 @@ class StaffModal extends Component {
           <h3>Choose your staffs</h3>
         </Modal.Header>
         <Modal.Body>
-          <li className={this.props.staffStore.isSelected ? 'selected' : ''} onClick={this.handleRemove}>I don't know</li>
+          <li className={this.props.staffStore.isSelected ? 'selected' : ''} onClick={this.handleRemove}>{'I don\'t know'}</li>
           {staffs.map((staff) => (
             <li
               key={staff.id}
